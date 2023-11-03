@@ -12,7 +12,7 @@ pipeline {
                         sortMode: 'DESCENDING', 
                         tagFilter: '*', 
                         type: 'PT_BRANCH', 
-                        useRepository: 'git@github.com:bakavets/web-app.git')
+                        useRepository: 'git@github.com:viktortat/web-app-for-jenkins.git')
     }
 
     stages {
@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Checkout') {
             steps{
-                    git branch: "${params.BRANCH}", credentialsId: 'github-bakavets-web-app-cred', url: 'git@github.com:bakavets/web-app.git'      
+                    git branch: "${params.BRANCH}", credentialsId: 'github-ssh-key', url: 'git@github.com:viktortat/web-app-for-jenkins.git'      
                 }
         }
         stage('Ls work dir') {

@@ -1,5 +1,9 @@
 pipeline {
     agent { label 'ubuntu' }
+    options {
+      buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '5'))
+      timestamps()
+    }
 
     parameters {
         choice choices: ['BRANCH', 'TAG', 'BRANCH_and_TAG', 'REVISION', 'PULL_REQUESTS'], description: '', name: 'TYPE'
@@ -13,7 +17,7 @@ pipeline {
                         sortMode: 'NONE', 
                         tagFilter: '*', 
                         type: 'PT_BRANCH', 
-                        useRepository: 'git@github.com:bakavets/web-app.git')
+                        useRepository: 'git@github.com:viktortat/web-app-for-jenkins.git')
         gitParameter (  branch: '', 
                         branchFilter: '.*', 
                         defaultValue: 'main', 
@@ -24,7 +28,7 @@ pipeline {
                         sortMode: 'NONE', 
                         tagFilter: '*', 
                         type: 'PT_TAG', 
-                        useRepository: 'git@github.com:bakavets/web-app.git')
+                        useRepository: 'git@github.com:viktortat/web-app-for-jenkins.git')
         gitParameter (  branch: '', 
                         branchFilter: '.*', 
                         defaultValue: 'main', 
@@ -36,7 +40,7 @@ pipeline {
                         sortMode: 'NONE', 
                         tagFilter: '*', 
                         type: 'PT_BRANCH_TAG', 
-                        useRepository: 'git@github.com:bakavets/web-app.git')
+                        useRepository: 'git@github.com:viktortat/web-app-for-jenkins.git')
         gitParameter (  branch: '', 
                         branchFilter: '.*', 
                         defaultValue: 'main', 
@@ -47,7 +51,7 @@ pipeline {
                         sortMode: 'NONE', 
                         tagFilter: '*', 
                         type: 'PT_REVISION', 
-                        useRepository: 'git@github.com:bakavets/web-app.git')
+                        useRepository: 'git@github.com:viktortat/web-app-for-jenkins.git')
         gitParameter (  branch: '', 
                         branchFilter: '.*', 
                         defaultValue: 'main', 
@@ -58,7 +62,7 @@ pipeline {
                         sortMode: 'NONE', 
                         tagFilter: '*', 
                         type: 'PT_PULL_REQUEST', 
-                        useRepository: 'git@github.com:bakavets/web-app.git')
+                        useRepository: 'git@github.com:viktortat/web-app-for-jenkins.git')
     }
 
     stages {
@@ -93,8 +97,8 @@ pipeline {
                             doGenerateSubmoduleConfigurations: false, 
                             extensions: [],
                             submoduleCfg: [], userRemoteConfigs: 
-                            [[credentialsId: 'github-bakavets-web-app-cred', 
-                            url: 'git@github.com:bakavets/web-app.git']]]
+                            [[credentialsId: 'github-ssh-key', 
+                            url: 'git@github.com:viktortat/web-app-for-jenkins.git']]]
                             ) 
                         }
                 }
@@ -109,8 +113,8 @@ pipeline {
                             doGenerateSubmoduleConfigurations: false, 
                             extensions: [],
                             submoduleCfg: [], userRemoteConfigs: 
-                            [[credentialsId: 'github-bakavets-web-app-cred',
-                            url: 'git@github.com:bakavets/web-app.git']]]
+                            [[credentialsId: 'github-ssh-key',
+                            url: 'git@github.com:viktortat/web-app-for-jenkins.git']]]
                             ) 
                         }
                 }
@@ -125,8 +129,8 @@ pipeline {
                             doGenerateSubmoduleConfigurations: false, 
                             extensions: [],
                             submoduleCfg: [], userRemoteConfigs: 
-                            [[credentialsId: 'github-bakavets-web-app-cred',
-                            url: 'git@github.com:bakavets/web-app.git']]]
+                            [[credentialsId: 'github-ssh-key',
+                            url: 'git@github.com:viktortat/web-app-for-jenkins.git']]]
                             ) 
                         }
                 }
@@ -141,8 +145,8 @@ pipeline {
                             doGenerateSubmoduleConfigurations: false, 
                             extensions: [],
                             submoduleCfg: [], userRemoteConfigs: 
-                            [[credentialsId: 'github-bakavets-web-app-cred',
-                            url: 'git@github.com:bakavets/web-app.git']]]
+                            [[credentialsId: 'github-ssh-key',
+                            url: 'git@github.com:viktortat/web-app-for-jenkins.git']]]
                             ) 
                         }
                 }
@@ -157,9 +161,9 @@ pipeline {
                             doGenerateSubmoduleConfigurations: false, 
                             extensions: [],
                             submoduleCfg: [], userRemoteConfigs: 
-                            [[credentialsId: 'github-bakavets-web-app-cred', 
+                            [[credentialsId: 'github-ssh-key', 
                             refspec: '+refs/pull/*:refs/remotes/origin/pr/*',
-                            url: 'git@github.com:bakavets/web-app.git']]]
+                            url: 'git@github.com:viktortat/web-app-for-jenkins.git']]]
                             ) 
                         }
                 }
